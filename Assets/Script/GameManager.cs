@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set;}
 
-    [SerializeField] private  TMP_Text scoreText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private GameObject StartPanal;
 
     private float score;
 
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
-        
+
         gameSpeed = 0;
         enabled = false;
     }
@@ -66,7 +67,15 @@ public class GameManager : MonoBehaviour
     public void scoreCount()
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
-        score += gameSpeed * Time.deltaTime * 10;
+        score += gameSpeed * Time.deltaTime * 2;
         scoreText.text = Mathf.FloorToInt(score).ToString("D6");
+    }
+
+    public void StartGame()
+    {
+        NewGame();
+        Time.timeScale = 1;
+
+        StartPanal.SetActive(false);
     }
 }
