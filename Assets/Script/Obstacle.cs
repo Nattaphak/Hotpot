@@ -6,9 +6,9 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] private int rotationSpeed;
 
-    private float timeToChange = 0;
+    public float timeToChange = 0;
     private float currentRotation;
-    private bool ChangeRotate = true;
+    public bool ChangeRotate = true;
 
     void Update()
     {
@@ -43,5 +43,10 @@ public class Obstacle : MonoBehaviour
         {
             transform.Rotate(0, 0, -currentRotation * Time.deltaTime);
         }
+    }
+
+    public void ResetRotate()
+    {
+        transform.rotation = Quaternion.identity;
     }
 }

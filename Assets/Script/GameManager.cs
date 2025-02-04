@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviour
     public float initialGameSpeed = 5f;
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set;}
+    public Player player;
+    public Obstacle obstacle;
 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject StartPanal;
     [SerializeField] private GameObject GameOverPanal;
+    [SerializeField] private CircleCollider2D  spawnPlayer;
 
     private float score;
 
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0;
+        player = FindObjectOfType<Player>();
     }
 
     private void Update()
@@ -56,6 +60,12 @@ public class GameManager : MonoBehaviour
 
         gameSpeed = initialGameSpeed;
         enabled = true;
+
+        player.currentLife = 3;
+        obstacle.ResetRotate();
+
+        player.gameObject.transform.position = GetRandomSpawnPosition();
+
     }
 
     public void GameOver()
@@ -64,6 +74,10 @@ public class GameManager : MonoBehaviour
 
         gameSpeed = 0;
         enabled = false;
+
+        obstacle.timeToChange = 0;
+        obstacle.ChangeRotate = true;
+
         GameOverPanal.SetActive(true);
     }
 
@@ -82,4 +96,17 @@ public class GameManager : MonoBehaviour
         StartPanal.SetActive(false);
         GameOverPanal.SetActive(false);
     }
+
+    private Vector3 GetRandomSpawnPosition()
+    {
+        if (spawnPlayer == null) return player.transform.position;
+
+        Vector2 center = spawnPlayer.bounds.center;
+        float radius = spawnPlayer.radius * spawnPlayer.transform.lossyScale.x;
+
+        Vector2 randomPoint = Random.insideUnitCircle * radius;
+        
+        return new Vector3(center.x + randomPoint.x, center.y + randomPoint.y, 0);
+    }
+
 }
