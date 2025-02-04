@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject StartPanal;
+    [SerializeField] private GameObject GameOverPanal;
 
     private float score;
 
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
 
         gameSpeed = 0;
         enabled = false;
+        GameOverPanal.SetActive(true);
     }
 
     public void scoreCount()
@@ -77,5 +80,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         StartPanal.SetActive(false);
+        GameOverPanal.SetActive(false);
     }
 }
