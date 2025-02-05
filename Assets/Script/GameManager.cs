@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject StartPanal;
     [SerializeField] private GameObject GameOverPanal;
+    [SerializeField] private GameObject PausePanal;
+    [SerializeField] private GameObject PauseButton;
     [SerializeField] private CircleCollider2D  spawnPlayer;
 
     private float score;
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         player = FindObjectOfType<Player>();
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = true;
     }
 
     private void Update()
@@ -65,7 +69,25 @@ public class GameManager : MonoBehaviour
         obstacle.ResetRotate();
 
         player.gameObject.transform.position = GetRandomSpawnPosition();
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = false;
 
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        PausePanal.SetActive(true);
+        GameObject.FindWithTag("Player").GetComponent< PlayerMovement >().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = true;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        PausePanal.SetActive(false);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = false;
     }
 
     public void GameOver()
@@ -78,6 +100,7 @@ public class GameManager : MonoBehaviour
         obstacle.timeToChange = 0;
         obstacle.ChangeRotate = true;
 
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameOverPanal.SetActive(true);
     }
 
@@ -95,6 +118,8 @@ public class GameManager : MonoBehaviour
 
         StartPanal.SetActive(false);
         GameOverPanal.SetActive(false);
+        PauseButton.SetActive(true);
+        PausePanal.SetActive(false);
     }
 
     private Vector3 GetRandomSpawnPosition()

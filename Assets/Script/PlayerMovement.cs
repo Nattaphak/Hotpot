@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 moveDir;
     private bool isMoving;
-    private bool isDashing = false;
+    public bool isDashing = false;
     private bool canDash = true;
 
     void Start()
