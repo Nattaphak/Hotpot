@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     private Vector3 moveDirection;
     private Rigidbody2D rb;
 
+    public float timeTodestory;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,6 +22,19 @@ public class Bullet : MonoBehaviour
     
     void Update()
     {
-        rb.velocity = new Vector3(moveDirection.x, moveDirection.y) * bulletSpeed; // ใช้ velocity แบบ 2D
+        timeTodestory = Time.deltaTime;
+        rb.velocity = new Vector3(moveDirection.x, moveDirection.y) * bulletSpeed;
+        if(timeTodestory >= 5f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
