@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     private Vector3 moveDirection;
     private Rigidbody2D rb;
 
-    public float timeTodestory;
+    public float timeTodestory = 0;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     
     void Update()
     {
-        timeTodestory = Time.deltaTime;
+        timeTodestory += Time.deltaTime;
         rb.velocity = new Vector3(moveDirection.x, moveDirection.y) * bulletSpeed;
         if(timeTodestory >= 5f)
         {

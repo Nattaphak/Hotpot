@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform spawnbullet;
 
     public GameObject bullet;
-    public int numBullet = 3;
-    public int RoundBullet = 2;
+    private int numBullet;
+    private int RoundBullet;
     public float delayShoot = 2f;
 
     private int currentRound = 0;
@@ -18,6 +18,12 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         StartCoroutine(ShootBullet());
+    }
+
+    public void SetRoundandNumberBullet(int BeforenumberBullet, int BeforeRoundBullet)
+    {
+        numBullet = BeforenumberBullet;
+        RoundBullet = BeforeRoundBullet;
     }
 
     IEnumerator ShootBullet()
@@ -29,6 +35,8 @@ public class Enemy : MonoBehaviour
 
             for (int currentBullet = 0; currentBullet < numBullet; currentBullet++)
             {
+                yield return new WaitForSeconds(delayShoot);
+
                 Vector3 direction = (player.transform.position - spawnbullet.position).normalized;
                 GameObject newBullet = Instantiate(bullet, spawnbullet.position, Quaternion.identity);
                 newBullet.GetComponent<Bullet>().SetDirection(direction);

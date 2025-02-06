@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public float gameSpeed { get; private set;}
     public Player player;
     public Obstacle obstacle;
+    public SpawnEnemy spawnEnemy;
 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject StartPanal;
@@ -61,6 +62,16 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         Time.timeScale = 1;
+        Enemy[] enemys = FindObjectsOfType<Enemy>();
+        Bullet[] bullets = FindObjectsOfType<Bullet>();
+        foreach (var enemy in enemys)
+        {
+            Destroy(enemy.gameObject);
+        }
+        foreach (var bullet in bullets)
+        {
+            Destroy(bullet.gameObject);
+        }
 
         gameSpeed = initialGameSpeed;
         enabled = true;
@@ -71,6 +82,9 @@ public class GameManager : MonoBehaviour
         player.gameObject.transform.position = GetRandomSpawnPosition();
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = false;
+
+        spawnEnemy.currentRound = 1;
+        spawnEnemy.timeToSpawn = 0;
 
     }
 
