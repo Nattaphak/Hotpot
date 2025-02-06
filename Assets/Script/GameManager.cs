@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviour
     public SpawnEnemy spawnEnemy;
 
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text FinalscoreText;
     [SerializeField] private GameObject StartPanal;
     [SerializeField] private GameObject GameOverPanal;
     [SerializeField] private GameObject PausePanal;
     [SerializeField] private GameObject PauseButton;
     [SerializeField] private CircleCollider2D  spawnPlayer;
+    [SerializeField] private GameObject HealthText;
 
     private float score;
 
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         PausePanal.SetActive(false);
+        HealthText.SetActive(false);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = false;
     }
@@ -116,6 +119,9 @@ public class GameManager : MonoBehaviour
 
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameOverPanal.SetActive(true);
+        HealthText.SetActive(false);
+        PauseButton.SetActive(false);
+        scoreText.gameObject.SetActive(false);
     }
 
     public void scoreCount()
@@ -123,6 +129,7 @@ public class GameManager : MonoBehaviour
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
         score += gameSpeed * Time.deltaTime * 2;
         scoreText.text = Mathf.FloorToInt(score).ToString("D6");
+        FinalscoreText.text = Mathf.FloorToInt(score).ToString("D6");
     }
 
     public void StartGame()
@@ -134,6 +141,8 @@ public class GameManager : MonoBehaviour
         GameOverPanal.SetActive(false);
         PauseButton.SetActive(true);
         PausePanal.SetActive(false);
+        HealthText.SetActive(true);
+        scoreText.gameObject.SetActive(true);
     }
 
     private Vector3 GetRandomSpawnPosition()

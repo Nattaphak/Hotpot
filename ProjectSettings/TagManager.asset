@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 283586147
+    locked: 0
+  - name: obtacal
+    uniqueID: 3545720411
     locked: 0
   - name: obtacal
     uniqueID: 3545720411

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     private int numBullet;
     private int RoundBullet;
-    public float delayShoot = 2f;
+    public float delayShoot = 4f;
 
     private int currentRound = 0;
 
