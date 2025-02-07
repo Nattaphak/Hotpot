@@ -4040,8 +4040,9 @@ GameObject:
   - component: {fileID: 2053123091}
   - component: {fileID: 2053123090}
   - component: {fileID: 2053123093}
-  - component: {fileID: 2053123094}
   - component: {fileID: 2053123096}
+  - component: {fileID: 2053123097}
+  - component: {fileID: 2053123098}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4117,7 +4118,7 @@ SpriteRenderer:
   m_SortingLayerID: 283586147
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -687969444, guid: e745797abf730ce4a92dc26f693426ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4156,7 +4157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd46ea9956c1124fb02ff5f1c26083c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   dashPower: 10
   dashDuration: 0.2
   dashCooldown: 0.5
@@ -4164,8 +4165,45 @@ MonoBehaviour:
   joystick: {fileID: 1173288719}
   rb: {fileID: 2053123090}
   isDashing: 0
---- !u!60 &2053123094
-PolygonCollider2D:
+--- !u!114 &2053123096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053123089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645f12d26258d83418d8e6bca52b12ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 3
+  currentLife: 0
+  RB: {fileID: 2053123090}
+  healthText: {fileID: 824580831}
+--- !u!95 &2053123097
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053123089}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa712433b901ca74d935dde9b8f4cebc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &2053123098
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4196,38 +4234,19 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.018883869, y: -0.069589615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.1333334, y: 2.1333334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
-  m_UseDelaunayMesh: 0
---- !u!114 &2053123096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053123089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 645f12d26258d83418d8e6bca52b12ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 3
-  currentLife: 0
-  RB: {fileID: 2053123090}
-  healthText: {fileID: 824580831}
+  serializedVersion: 2
+  m_Size: {x: 0.7870443, y: 0.4929253}
+  m_EdgeRadius: 0
 --- !u!1 &2086389221
 GameObject:
   m_ObjectHideFlags: 0
