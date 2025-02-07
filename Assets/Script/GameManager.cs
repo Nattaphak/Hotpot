@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bullet.gameObject);
         }
+        
+        score = 0;
 
         gameSpeed = initialGameSpeed;
         enabled = true;
