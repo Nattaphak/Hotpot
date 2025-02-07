@@ -22,10 +22,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject StartPanal;
     [SerializeField] private GameObject GameOverPanal;
     [SerializeField] private GameObject PausePanal;
-    [SerializeField] private GameObject PauseButton;
+    [SerializeField] private GameObject PauseButtonAndSoundButton;
     [SerializeField] private CircleCollider2D  spawnPlayer;
     [SerializeField] private GameObject HealthText;
+    
+    [SerializeField] private AudioSource BgSound;
+    [SerializeField] private Image imageSound;
+    [SerializeField] private Sprite SoundOn;
+    [SerializeField] private Sprite SoundOff;
 
+    private bool soundtoggle = false;
     private float score;
 
     private void Awake()
@@ -86,6 +92,12 @@ public class GameManager : MonoBehaviour
         player.gameObject.transform.position = GetRandomSpawnPosition();
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().isDashing = false;
+        
+        if (!soundtoggle)
+        {
+            BgSound.Stop();
+            BgSound.Play();
+        }
 
         spawnEnemy.currentRound = 1;
         spawnEnemy.timeToSpawn = 0;
@@ -122,8 +134,10 @@ public class GameManager : MonoBehaviour
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameOverPanal.SetActive(true);
         HealthText.SetActive(false);
-        PauseButton.SetActive(false);
+        PauseButtonAndSoundButton.SetActive(false);
         scoreText.gameObject.SetActive(false);
+
+        BgSound.Stop();
     }
 
     public void scoreCount()
@@ -141,7 +155,7 @@ public class GameManager : MonoBehaviour
 
         StartPanal.SetActive(false);
         GameOverPanal.SetActive(false);
-        PauseButton.SetActive(true);
+        PauseButtonAndSoundButton.SetActive(true);
         PausePanal.SetActive(false);
         HealthText.SetActive(true);
         scoreText.gameObject.SetActive(true);
@@ -159,4 +173,19 @@ public class GameManager : MonoBehaviour
         return new Vector3(center.x + randomPoint.x, center.y + randomPoint.y, 0);
     }
 
+    public void SoundToggleButton()
+    {
+        if(!soundtoggle)
+        {
+            soundtoggle = true;
+            imageSound.sprite = SoundOff;
+            BgSound.Pause();
+        }
+        else
+        {
+            soundtoggle = false;
+            imageSound.sprite = SoundOn;
+            BgSound.Play();
+        }
+    }
 }

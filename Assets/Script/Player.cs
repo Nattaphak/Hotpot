@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Color damageColor = Color.red;
     [SerializeField] private Color iframeColor = Color.grey;
     [SerializeField] private BoxCollider2D playerHitBox;
+    [SerializeField] private AudioSource HurtSound;
+    [SerializeField] private AudioSource GameOverSound;
 
     public SpriteRenderer sprite;
     Color defaultColor;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
 
             if (currentLife <= 0)
             {
+                GameOverSound.Play();
                 GameManager.Instance.GameOver();
             }
         }
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
 
     IEnumerator SwirchColor()
     {
+        HurtSound.Play();
         playerHitBox.enabled = false;
         for(int i = 0; i < 4; i++)
         {
