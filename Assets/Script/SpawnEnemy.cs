@@ -9,6 +9,7 @@ public class SpawnEnemy : MonoBehaviour
 
     [SerializeField] private GameObject enemy;
 
+    public float maxTimeTospawn = 5f;
     public int currentRound = 1;
     public float timeToSpawn = 0;
 
@@ -16,7 +17,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         timeToSpawn += Time.deltaTime;
 
-        if (timeToSpawn >= 25f)
+        if (timeToSpawn >= maxTimeTospawn)
         {
             StartCoroutine(SpawnEnemyRoutine());
             timeToSpawn = 0;
@@ -38,11 +39,16 @@ public class SpawnEnemy : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
         if (currentRound < 6) 
         {
             currentRound++;
+            maxTimeTospawn += 5f;
+        }
+        else if (currentRound == 6)
+        {
+            maxTimeTospawn -= 2f;
         }
     }
 }

@@ -4182,6 +4182,10 @@ MonoBehaviour:
   currentLife: 0
   RB: {fileID: 2053123090}
   healthText: {fileID: 824580831}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  iframeColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  playerHitBox: {fileID: 0}
+  sprite: {fileID: 2053123091}
 --- !u!95 &2053123097
 Animator:
   serializedVersion: 5
@@ -4327,6 +4331,7 @@ MonoBehaviour:
   - {fileID: 34812593}
   BeforenumBullet: 1
   enemy: {fileID: 317088606433148139, guid: abed9c2c60c8d9f4887d2074a1d2905b, type: 3}
+  maxTimeTospawn: 5
   currentRound: 1
   timeToSpawn: 0
 --- !u!1 &2088550598
