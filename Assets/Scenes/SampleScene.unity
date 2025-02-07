@@ -5016,6 +5016,7 @@ MonoBehaviour:
   joystick: {fileID: 1173288719}
   rb: {fileID: 2053123090}
   box: {fileID: 0}
+  player: {fileID: 0}
   DashSound: {fileID: 508845070}
   isDashing: 0
 --- !u!114 &2053123096
@@ -5039,6 +5040,7 @@ MonoBehaviour:
   playerHitBox: {fileID: 0}
   HurtSound: {fileID: 1700296536}
   GameOverSound: {fileID: 190246274}
+  immune: 0
   sprite: {fileID: 2053123091}
 --- !u!95 &2053123097
 Animator:

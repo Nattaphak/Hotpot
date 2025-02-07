@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private BoxCollider2D playerHitBox;
     [SerializeField] private AudioSource HurtSound;
     [SerializeField] private AudioSource GameOverSound;
-
+    
+    public bool immune = false;
     public SpriteRenderer sprite;
     Color defaultColor;
 
@@ -36,13 +37,16 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Bullet"))
         {
-            currentLife--;
-            StartCoroutine(SwirchColor());
-
-            if (currentLife <= 0)
+            if(!immune)
             {
-                GameOverSound.Play();
-                GameManager.Instance.GameOver();
+                currentLife--;
+                StartCoroutine(SwirchColor());
+
+                if (currentLife <= 0)
+                {
+                    GameOverSound.Play();
+                    GameManager.Instance.GameOver();
+                }
             }
         }
     }
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
     IEnumerator SwirchColor()
     {
         HurtSound.Play();
-        playerHitBox.enabled = false;
+        immune = true;
         for(int i = 0; i < 4; i++)
         {
             sprite.color = damageColor;
@@ -64,6 +68,6 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         sprite.color = defaultColor;
-        playerHitBox.enabled = true;
+        immune = false;
     }
 }

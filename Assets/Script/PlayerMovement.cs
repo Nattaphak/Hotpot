@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Joystick joystick;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D box;
+    [SerializeField] private Player player;
     [SerializeField] private AudioSource DashSound;
 
     private Vector2 moveDir;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+        player = GetComponent<Player>();
     }
 
     void Update()
@@ -68,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         canDash = false;
 
-        box.enabled = false;
+        player.immune = true;
         DashSound.Play();
 
         Vector2 dashDirection = (pointerDash.position - transform.position).normalized;
@@ -77,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashDuration);
 
-        box.enabled = true;
+        player.immune = false;
 
         rb.velocity = Vector2.zero;
         isDashing = false;
