@@ -4158,12 +4158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  dashPower: 10
+  dashPower: 5
   dashDuration: 0.2
   dashCooldown: 0.5
   pointerDash: {fileID: 2839969}
   joystick: {fileID: 1173288719}
   rb: {fileID: 2053123090}
+  box: {fileID: 0}
   isDashing: 0
 --- !u!114 &2053123096
 MonoBehaviour:

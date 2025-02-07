@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform pointerDash;
     [SerializeField] private Joystick joystick;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private BoxCollider2D box;
 
     private Vector2 moveDir;
     private bool isMoving;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -65,11 +67,15 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         canDash = false;
 
+        box.enabled = false;
+
         Vector2 dashDirection = (pointerDash.position - transform.position).normalized;
         rb.velocity = Vector2.zero;
         rb.AddForce(dashDirection * dashPower, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashDuration);
+
+        box.enabled = true;
 
         rb.velocity = Vector2.zero;
         isDashing = false;
