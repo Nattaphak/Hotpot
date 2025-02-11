@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
     public void scoreCount()
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
-        score += gameSpeed * Time.deltaTime * 2;
+        score += gameSpeed * Time.deltaTime * 10;
         scoreText.text = Mathf.FloorToInt(score).ToString("D6");
         FinalscoreText.text = Mathf.FloorToInt(score).ToString("D6");
     }
